@@ -1,0 +1,34 @@
+# Render Blueprint — Takvim Pro
+# Deploy: Render Dashboard → New + → Blueprint → bu repoyu seç → Apply
+# (ya da repo public ise: https://render.com/deploy?repo=<repo-url>)
+services:
+  - type: web
+    name: takvim-pro
+    runtime: docker
+    dockerfilePath: ./Dockerfile
+    plan: free              # Ücretsiz plan (15 dk hareketsizlikte uyur; disk yoktur)
+    region: frankfurt       # Türkiye'ye en yakın bölge
+    healthCheckPath: /api/health
+    autoDeploy: true        # GitHub'a push'ta otomatik yeniden deploy
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: TRUST_PROXY     # Render TLS'i proxy'de sonlandırır → secure cookie için gerekli
+        value: "true"
+      - key: COOKIE_SECURE
+        value: "true"
+      - key: ALLOW_REGISTRATION
+        value: "true"        # İlk kayıt olan kullanıcı yönetici olur
+      - key: SHOW_DEMO_HINT
+        value: "false"       # Canlıda örnek hesap ipucunu gösterme
+      - key: APP_TZ
+        value: Europe/Istanbul
+      - key: DB_PATH
+        value: /data/takvim.db
+    # ── KALICI VERİ (önerilir) ───────────────────────────────────────────
+    # Ücretsiz planda disk YOKTUR → her yeniden başlatmada veriler sıfırlanır.
+    # Kalıcılık için: plan'ı "starter" yapın (~$7/ay) ve aşağıdaki disk bloğunu açın.
+    # disk:
+    #   name: takvim-data
+    #   mountPath: /data
+    #   sizeGB: 1

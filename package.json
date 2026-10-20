@@ -1,0 +1,21 @@
+{
+  "name": "takvim-pro",
+  "version": "1.0.0",
+  "description": "Çok kullanıcılı takvim ve iş akışı (Kanban) uygulaması — Node.js + Express + SQL",
+  "private": true,
+  "main": "server.js",
+  "engines": { "node": ">=20" },
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js",
+    "migrate": "node scripts/migrate.js",
+    "seed": "node scripts/seed.js",
+    "test": "node --test tests/"
+  },
+  "dependencies": {
+    "bcryptjs": "^3.0.2",
+    "better-sqlite3": "^11.10.0",
+    "express": "^5.1.0"
+  },
+  "optionalDependencies": {}
+}

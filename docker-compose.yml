@@ -1,0 +1,36 @@
+# Kullanım:
+#   docker compose up -d --build
+#   docker compose exec app npm run seed      # (isteğe bağlı) örnek veriler
+# Uygulama: http://localhost:3000
+services:
+  app:
+    build: .
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      NODE_ENV: production
+      APP_TZ: Europe/Istanbul
+      DB_PATH: /data/takvim.db
+      # HTTPS sağlayan bir ters vekil arkasında değilseniz false bırakın:
+      COOKIE_SECURE: "false"
+      ALLOW_REGISTRATION: "true"
+    volumes:
+      - takvim-data:/data
+
+  # --- PostgreSQL ile çalıştırmak için (deneysel) ---
+  # 1) Aşağıdaki servisi açın, 2) app.environment içine DB_CLIENT=postgres ve DATABASE_URL ekleyin,
+  # 3) package.json'a "pg" bağımlılığını ekleyin (npm install pg).
+  # db:
+  #   image: postgres:16-alpine
+  #   restart: unless-stopped
+  #   environment:
+  #     POSTGRES_USER: takvim
+  #     POSTGRES_PASSWORD: takvim
+  #     POSTGRES_DB: takvim
+  #   volumes:
+  #     - pg-data:/var/lib/postgresql/data
+
+volumes:
+  takvim-data:
+  # pg-data:
