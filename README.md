@@ -1,5 +1,7 @@
 # Takvim Pro — Ekip Takvimi & İş Akışı
 
+> 🌐 **Canlı:** https://takvim-pro.onrender.com — Render'da (Docker) yayında.
+
 Çok kullanıcılı takvim + Kanban görev yönetimi uygulaması.
 **Node.js (LTS) + Express 5** arka uç, **SQLite** (better-sqlite3, tek dosya, kurulum gerektirmez) ve
 taşınabilir SQL şeması; ön yüz bağımlılıksız (vanilla JS), Türkçe arayüz, PWA olarak kurulabilir.
